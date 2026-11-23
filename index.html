@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تقویم شمسی</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#f2f7f6;--sf:#fff;--tx:#14233a;--mu:#5d6b7e;--ln:#d5e2e0;--pr:#1f3a93;--on:#fff;--n:#2ba39b;--r:#d98a1c;--w:#7b5ea7;--hol:#b83a4b;--tod:#e8a33d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a2b;--sf:#172640;--tx:#e8eef7;--mu:#9bacc4;--ln:#2a3d5c;--pr:#7f98f0;--on:#0f1a2b;--n:#47c8bf;--r:#f0b04d;--w:#b69ae0;--hol:#f0788a}}
+:root[data-theme="dark"]{--bg:#0f1a2b;--sf:#172640;--tx:#e8eef7;--mu:#9bacc4;--ln:#2a3d5c;--pr:#7f98f0;--on:#0f1a2b;--n:#47c8bf;--r:#f0b04d;--w:#b69ae0;--hol:#f0788a}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:400 15px/1.7 Vazirmatn,Tahoma,sans-serif;padding:12px}
+.app{max-width:960px;margin:0 auto;display:grid;gap:12px}
+header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+h1{margin:0;font-size:1.5rem;font-weight:800;color:var(--pr)}
+.ctl{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+button,select,input{font:inherit;color:var(--tx);background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:4px 10px;cursor:pointer}
+input[type=number]{width:80px;cursor:text}
+button:focus-visible,select:focus-visible,input:focus-visible,.day:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+.pri{background:var(--pr);color:var(--on);border-color:var(--pr)}
+.chips{display:flex;gap:14px;flex-wrap:wrap;font-size:.9rem}
+.chips label{display:flex;align-items:center;gap:6px;cursor:pointer}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.cal{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:10px}
+.title{text-align:center;font-size:1.25rem;font-weight:800;margin:2px 0 2px}
+.sub{text-align:center;color:var(--mu);font-size:.85rem;margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.wd{text-align:center;font-weight:600;color:var(--mu);font-size:.85rem;padding:4px 0}
+.wd:last-child{color:var(--hol)}
+.day{min-height:68px;border:1px solid var(--ln);border-radius:8px;background:transparent;padding:3px 4px;display:flex;flex-direction:column;justify-content:space-between;text-align:right;min-width:0}
+.day.e{visibility:hidden;border:0}
+.day b{font-size:1.15rem;font-weight:800}
+.day.h b{color:var(--hol)}
+.day.h{background:color-mix(in srgb,var(--hol) 9%,transparent)}
+.day.t{box-shadow:inset 0 0 0 2px var(--tod)}
+.day.s{background:var(--pr);color:var(--on);border-color:var(--pr)}
+.day.s b{color:var(--on)}
+.mi{display:flex;justify-content:space-between;font-size:.68rem;color:var(--mu);direction:ltr}
+.day.s .mi{color:var(--on);opacity:.85}
+.dots{display:flex;gap:3px;min-height:8px}
+.dots .dot{width:7px;height:7px}
+.panel{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:14px}
+.panel h2{margin:0 0 2px;font-size:1.1rem}
+.panel p{margin:0 0 8px;color:var(--mu);font-size:.85rem}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+li{display:flex;gap:8px;align-items:baseline}
+li .dot{margin-top:6px}
+li small{color:var(--hol);font-weight:600}
+li i{font-style:normal;min-width:2.2em;color:var(--mu)}
+.note{color:var(--mu);font-size:.8rem}
+@media(max-width:520px){.day{min-height:56px}.mi{font-size:.6rem}body{padding:8px}}
+body{padding:8px;font-size:14px;line-height:1.5}
+.app{gap:6px}
+header{gap:0}
+.ctl{width:100%;justify-content:space-between;flex-wrap:nowrap}
+.ctl select{flex:1;min-width:0}
+input[type=number]{width:64px}
+select,input,button{padding:3px 8px}
+.chips{gap:8px;font-size:.8rem;justify-content:space-between;align-items:center}
+.cal{padding:6px}
+.sub{font-size:.75rem;margin:0 0 4px}
+.grid{gap:3px}
+.wd{font-size:.72rem;padding:0}
+.day{min-height:46px;padding:2px 3px;border-radius:6px}
+.day b{font-size:1rem;line-height:1.2}
+.mi{font-size:.58rem}
+.dots{min-height:5px}
+.dots .dot{width:5px;height:5px}
+.panel{padding:8px 12px;border-radius:12px}
+.panel h2{font-size:1rem}
+.panel p{margin:0 0 4px}
+#dl{max-height:84px;overflow:auto}
+summary{cursor:pointer;font-weight:600}
+details ul{margin-top:8px}
+.note{display:none;margin:0}
+details[open]~.note{display:block}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+
+<div class="ctl">
+<button id="prev" aria-label="ماه قبل">‹</button>
+<select id="ms" aria-label="ماه"></select>
+<input id="ys" type="number" min="1300" max="1500" aria-label="سال">
+<button id="next" aria-label="ماه بعد">›</button>
+<button id="today" class="pri">امروز</button>
+</div>
+</header>
+<div class="chips" id="chips">
+<label><input type="checkbox" data-t="n" checked><span class="dot" style="background:var(--n)"></span>ملی و ایرانی</label>
+<label><input type="checkbox" data-t="r" checked><span class="dot" style="background:var(--r)"></span>مذهبی</label>
+<label><input type="checkbox" data-t="w" checked><span class="dot" style="background:var(--w)"></span>جهانی</label>
+<select id="off" title="تنظیم تاریخ قمری"><option value="-1">قمری ۱−</option><option value="0" selected>قمری ±۰</option><option value="1">قمری ۱+</option></select>
+</div>
+<section class="cal">
+
+<div class="sub" id="st"></div>
+<div class="grid" id="g"></div>
+</section>
+<section class="panel" aria-live="polite">
+<h2 id="dh"></h2><p id="dd"></p><ul id="dl"></ul>
+</section>
+<details class="panel"><summary>مناسبت‌های این ماه</summary><ul id="ml"></ul></details>
+<p class="note">تاریخ مناسبت‌های قمری با تقویم قمری محاسباتی نمایش داده می‌شود و ممکن است با رؤیت هلال یک روز اختلاف داشته باشد؛ در این صورت از تنظیم بالا استفاده کنید. روزهای تعطیل رسمی با رنگ قرمز مشخص شده‌اند.</p>
+</div>
+<script>
+const P=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const PM=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+const WD=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
+const HM=['محرم','صفر','ربیع‌الاول','ربیع‌الثانی','جمادی‌الاول','جمادی‌الثانی','رجب','شعبان','رمضان','شوال','ذی‌القعده','ذی‌الحجه'];
+const GM=['ژانویه','فوریه','مارس','آوریل','مه','ژوئن','ژوئیه','اوت','سپتامبر','اکتبر','نوامبر','دسامبر'];
+const COL={n:'var(--n)',r:'var(--r)',w:'var(--w)'};
+const mk=s=>{const m={};s.trim().split('\n').forEach(l=>{const a=l.trim().split(' '),k=a.shift();let t=a.join(' '),h=0;if(t.endsWith('!')){h=1;t=t.slice(0,-1).trim()}(m[k]=m[k]||[]).push([t,h])});return m};
+// مناسبت‌های ثابت شمسی (ماه/روز)
+const J=mk(`1/1 نوروز !
+1/2 عید نوروز !
+1/3 عید نوروز !
+1/4 عید نوروز !
+1/12 روز جمهوری اسلامی !
+1/13 سیزده‌به‌در !
+1/25 بزرگداشت عطار نیشابوری
+2/1 بزرگداشت سعدی
+2/10 روز ملی خلیج فارس
+2/12 روز معلم
+2/25 بزرگداشت فردوسی
+2/28 بزرگداشت حکیم عمر خیام
+3/1 بزرگداشت ملاصدرا
+3/3 آزادسازی خرمشهر
+3/14 رحلت امام خمینی !
+3/15 قیام ۱۵ خرداد !
+4/7 شهادت دکتر بهشتی و ۷۲ تن از یاران
+5/17 روز خبرنگار
+6/1 بزرگداشت ابوعلی سینا و روز پزشک
+6/5 بزرگداشت زکریای رازی و روز داروساز
+6/27 روز شعر و ادب فارسی
+6/31 آغاز هفته دفاع مقدس
+7/7 روز آتش‌نشانی و ایمنی
+7/20 بزرگداشت حافظ
+8/13 روز دانش‌آموز
+9/5 روز بسیج مستضعفان
+9/16 روز دانشجو
+9/30 شب یلدا
+10/9 روز بصیرت و میثاق امت با ولایت
+10/19 قیام مردم قم
+11/12 بازگشت امام خمینی به ایران
+11/22 پیروزی انقلاب اسلامی !
+12/5 بزرگداشت خواجه نصیرالدین طوسی و روز مهندس
+12/15 روز درختکاری
+12/29 ملی شدن صنعت نفت !`);
+// مناسبت‌های قمری (ماه/روز)
+const H=mk(`1/1 آغاز سال هجری قمری
+1/9 تاسوعای حسینی !
+1/10 عاشورای حسینی !
+2/20 اربعین حسینی !
+2/28 رحلت پیامبر و شهادت امام حسن مجتبی !
+3/8 شهادت امام حسن عسکری
+3/17 میلاد پیامبر اکرم و امام صادق !
+5/5 ولادت حضرت زینب و روز پرستار
+6/3 شهادت حضرت فاطمه زهرا
+6/20 ولادت حضرت فاطمه و روز مادر
+7/3 شهادت امام هادی
+7/10 ولادت امام جواد
+7/13 ولادت امام علی و روز پدر !
+7/25 شهادت امام کاظم
+7/27 مبعث پیامبر اکرم !
+8/3 ولادت امام حسین و روز پاسدار
+8/4 ولادت حضرت عباس و روز جانباز
+8/5 ولادت امام سجاد
+8/15 ولادت امام زمان !
+9/15 ولادت امام حسن مجتبی
+9/19 ضربت خوردن امام علی
+9/21 شهادت امام علی !
+10/1 عید سعید فطر !
+10/2 تعطیلی عید فطر !
+10/25 شهادت امام صادق !
+11/1 ولادت حضرت معصومه و روز دختر
+11/11 ولادت امام رضا
+12/10 عید سعید قربان !
+12/18 عید سعید غدیر خم !`);
+// روزهای جهانی (ماه/روز میلادی)
+const W=mk(`1/1 آغاز سال نو میلادی
+2/14 روز ولنتاین
+3/8 روز جهانی زن
+3/14 روز جهانی ریاضیات
+3/20 روز جهانی شادی
+3/21 روز جهانی شعر
+3/22 روز جهانی آب
+4/2 روز جهانی آگاهی از اوتیسم
+4/7 روز جهانی سلامت
+4/22 روز جهانی زمین
+4/23 روز جهانی کتاب
+5/1 روز جهانی کارگر
+5/3 روز جهانی آزادی مطبوعات
+5/12 روز جهانی پرستار
+5/31 روز جهانی بدون دخانیات
+6/5 روز جهانی محیط زیست
+6/20 روز جهانی پناهندگان
+9/8 روز جهانی سواد
+9/21 روز جهانی صلح
+9/27 روز جهانی گردشگری
+10/1 روز جهانی سالمندان
+10/5 روز جهانی معلم
+10/10 روز جهانی سلامت روان
+10/16 روز جهانی غذا
+10/24 روز سازمان ملل متحد
+11/14 روز جهانی دیابت
+11/20 روز جهانی کودک
+12/1 روز جهانی ایدز
+12/3 روز جهانی افراد دارای معلولیت
+12/10 روز جهانی حقوق بشر
+12/25 کریسمس`);
+
+const opt={year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'};
+const fj=new Intl.DateTimeFormat('en-u-ca-persian-nu-latn',opt);
+const fh=new Intl.DateTimeFormat('en-u-ca-islamic-civil-nu-latn',opt);
+const U=(y,m,d)=>new Date(Date.UTC(y,m,d,12));
+const parts=(f,d)=>{const o={};f.formatToParts(d).forEach(p=>o[p.type]=p.value);return[+o.year,+o.month,+o.day]};
+const $=s=>document.querySelector(s);
+let off=0,flt={n:1,r:1,w:1};
+const now=new Date(),TODAY=U(now.getFullYear(),now.getMonth(),now.getDate());
+let [vy,vm]=parts(fj,TODAY),sel=TODAY;
+
+function info(dt){
+ const[jy,jm,jd]=parts(fj,dt),[hy,hm,hd]=parts(fh,new Date(dt.getTime()+off*864e5));
+ const gm=dt.getUTCMonth()+1,gd=dt.getUTCDate(),e=[];
+ (J[jm+'/'+jd]||[]).forEach(x=>e.push({n:x[0],h:x[1],t:'n'}));
+ (H[hm+'/'+hd]||[]).forEach(x=>e.push({n:x[0],h:x[1],t:'r'}));
+ (W[gm+'/'+gd]||[]).forEach(x=>e.push({n:x[0],h:0,t:'w'}));
+ const wd=(dt.getUTCDay()+1)%7;
+ return{jy,jm,jd,hy,hm,hd,gm,gd,wd,e:e.filter(x=>flt[x.t]),hol:wd==6||e.some(x=>x.h)};
+}
+function startOf(y,m){
+ let d=U(y+621,2,21);d.setUTCDate(d.getUTCDate()+Math.round((m-1)*30.5));
+ for(let i=0;i<60;i++){
+  const[a,b,c]=parts(fj,d),cur=a*12+b,tg=y*12+m;
+  if(cur==tg&&c==1)return d;
+  const step=cur==tg?-(c-1):(cur>tg?-1:1);
+  d=new Date(d.getTime()+step*864e5);
+ }
+ return d;
+}
+function render(){
+ const s=startOf(vy,vm),nx=vm==12?startOf(vy+1,1):startOf(vy,vm+1),len=Math.round((nx-s)/864e5);
+ const f=info(s),l=info(new Date(nx.getTime()-864e5));
+ 
+ $('#st').textContent=GM[f.gm-1]+(f.gm!=l.gm?' – '+GM[l.gm-1]:'')+' '+P(s.getUTCFullYear())+' · '+HM[f.hm-1]+(f.hm!=l.hm?' – '+HM[l.hm-1]:'')+' '+P(f.hy);
+ $('#ms').value=vm;$('#ys').value=vy;
+ let h=WD.map(w=>`<div class="wd">${w}</div>`).join('')+'<div class="day e"></div>'.repeat(f.wd);
+ const list=[];
+ for(let i=0;i<len;i++){
+  const dt=new Date(s.getTime()+i*864e5),x=info(dt);
+  const c=['day',x.hol?'h':'',+dt==+TODAY?'t':'',+dt==+sel?'s':''].join(' ');
+  const dots=[...new Set(x.e.map(y=>y.t))].map(t=>`<span class="dot" style="background:${COL[t]}"></span>`).join('');
+  h+=`<button class="${c}" data-i="${i}" aria-label="${P(x.jd)} ${PM[vm-1]}"><span class="mi"><span>${x.gd}</span><span>${x.hd}</span></span><b>${P(x.jd)}</b><span class="dots">${dots}</span></button>`;
+  x.e.forEach(y=>list.push(`<li><i>${P(x.jd)}</i><span class="dot" style="background:${COL[y.t]}"></span><span>${y.n} ${y.h?'<small>(تعطیل)</small>':''}</span></li>`));
+ }
+ $('#g').innerHTML=h;
+ $('#ml').innerHTML=list.join('')||'<li>مناسبتی با فیلتر انتخابی نیست.</li>';
+ detail();
+}
+function detail(){
+ const x=info(sel);
+ $('#dh').textContent=WD[x.wd]+' '+P(x.jd)+' '+PM[x.jm-1]+' '+P(x.jy);
+ $('#dd').textContent=x.gd+' '+GM[x.gm-1]+' '+sel.getUTCFullYear()+' · '+P(x.hd)+' '+HM[x.hm-1]+' '+P(x.hy);
+ $('#dl').innerHTML=x.e.map(y=>`<li><span class="dot" style="background:${COL[y.t]}"></span><span>${y.n} ${y.h?'<small>(تعطیل رسمی)</small>':''}</span></li>`).join('')||(x.wd==6?'<li><small>جمعه، تعطیل</small></li>':'<li class="note">مناسبتی ثبت نشده است.</li>');
+}
+function go(d){vm+=d;if(vm>12){vm=1;vy++}if(vm<1){vm=12;vy--}render()}
+$('#ms').innerHTML=PM.map((m,i)=>`<option value="${i+1}">${m}</option>`).join('');
+$('#prev').onclick=()=>go(-1);$('#next').onclick=()=>go(1);
+$('#today').onclick=()=>{[vy,vm]=parts(fj,TODAY);sel=TODAY;render()};
+$('#ms').onchange=e=>{vm=+e.target.value;render()};
+$('#ys').onchange=e=>{const v=+e.target.value;if(v>=1300&&v<=1500){vy=v;render()}};
+$('#off').onchange=e=>{off=+e.target.value;render()};
+$('#chips').addEventListener('change',e=>{if(e.target.dataset.t){flt[e.target.dataset.t]=e.target.checked?1:0;render()}});
+$('#g').onclick=e=>{const b=e.target.closest('.day[data-i]');if(b){sel=new Date(startOf(vy,vm).getTime()+b.dataset.i*864e5);render()}};
+render();
+</script>
+</body>
+</html>
+
